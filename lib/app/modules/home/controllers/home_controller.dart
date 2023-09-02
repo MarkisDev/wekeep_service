@@ -1,13 +1,12 @@
 import 'package:atf/app/data/models/shop_model.dart';
 import 'package:atf/app/data/providers/firestore_provider.dart';
 import 'package:atf/app/modules/authentication/controllers/authentication_controller.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
 class HomeController extends GetxController {
-  final geo = Geoflutterfire();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   var nameController = TextEditingController();
   var numController = TextEditingController();
@@ -52,7 +51,7 @@ class HomeController extends GetxController {
     }
 
     var x = await Geolocator.getCurrentPosition();
-    GeoFirePoint pos = geo.point(latitude: x.latitude, longitude: x.longitude);
+    GeoPoint pos = GeoPoint(x.latitude, x.longitude);
 
     await FirestoreDb.addShopDetails(
         nameController.text,

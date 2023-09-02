@@ -1,6 +1,5 @@
 import 'package:atf/app/data/models/shop_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
 import 'package:geolocator/geolocator.dart';
 
 class FirestoreDb {
@@ -25,12 +24,12 @@ class FirestoreDb {
   }
 
   static addShopDetails(String shopName, String phoneNum, String address,
-      String uid, GeoFirePoint pos) async {
+      String uid, GeoPoint pos) async {
     await _firebaseFirestore.collection('shops').doc(uid).update({
       'address': address,
       'phoneNum': phoneNum,
       'shopName': shopName,
-      'location': pos.data,
+      'location': pos,
     });
   }
 

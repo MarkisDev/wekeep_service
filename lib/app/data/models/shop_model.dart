@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:geoflutterfire/geoflutterfire.dart';
 
 class ShopModel {
   late String name;
@@ -9,7 +8,7 @@ class ShopModel {
   String? address;
   String? phoneNum;
   String? shopName;
-  GeoFirePoint? location;
+  GeoPoint? location;
 
   ShopModel(
       {required this.name,
@@ -33,7 +32,6 @@ class ShopModel {
     shopName = documentSnapshot['shopName'];
     GeoPoint geopoint = documentSnapshot['location']['geopoint'];
 
-    location = Geoflutterfire()
-        .point(latitude: geopoint.latitude, longitude: geopoint.longitude);
+    location = GeoPoint(geopoint.latitude, geopoint.longitude);
   }
 }
